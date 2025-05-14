@@ -32,8 +32,7 @@
       localStorage.setItem("latitude", lat);
       localStorage.setItem("longitude", lon);
 
-      // Redirect to index.html to display it
-      window.location.href = "index.html";
+      document.getElementById("status").innerText = "Location fetched successfully.";
     }
 
     function showError(error) {
