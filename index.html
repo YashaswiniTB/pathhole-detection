@@ -10,7 +10,23 @@
 </head>
 <body>
   <h1>Pothole Detection Robot</h1>
-  <p><strong>Latitude:</strong> Waiting for GPS...</p>
-  <p><strong>Longitude:</strong></p>
+
+  <p id="latitude">Latitude: Waiting...</p>
+  <p id="longitude">Longitude: Waiting...</p>
+
+  <script>
+    window.onload = function () {
+      const lat = localStorage.getItem("latitude");
+      const lon = localStorage.getItem("longitude");
+
+      if (lat && lon) {
+        document.getElementById("latitude").textContent = "Latitude: " + lat;
+        document.getElementById("longitude").textContent = "Longitude: " + lon;
+      } else {
+        document.getElementById("latitude").textContent = "Latitude: Not Available";
+        document.getElementById("longitude").textContent = "Longitude: Not Available";
+      }
+    };
+  </script>
 </body>
 </html>
