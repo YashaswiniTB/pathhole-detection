@@ -15,18 +15,30 @@
   <p id="longitude"><strong>Longitude:</strong></p>
 
   <script>
-    window.onload = function () {
+    function updateCoordinates() {
       const lat = localStorage.getItem("latitude");
       const lon = localStorage.getItem("longitude");
 
       if (lat && lon) {
+        // Show the coordinates
         document.getElementById("latitude").innerHTML = "<strong>Latitude:</strong> " + lat;
         document.getElementById("longitude").innerHTML = "<strong>Longitude:</strong> " + lon;
+
+        // Clear the stored coordinates after displaying them
+        localStorage.removeItem("latitude");
+        localStorage.removeItem("longitude");
       } else {
+        // If no coordinates are available, show "Not available"
         document.getElementById("latitude").innerHTML = "<strong>Latitude:</strong> Not available";
         document.getElementById("longitude").innerHTML = "<strong>Longitude:</strong> Not available";
       }
-    };
+    }
+
+    // Run the update function when the page loads
+    window.onload = updateCoordinates;
+
+    // Check for new coordinates every 1 second
+    setInterval(updateCoordinates, 1000);
   </script>
 </body>
 </html>
