@@ -1,29 +1,44 @@
-<script>
-  function getLocation() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition, showError);
-    } else {
-      alert("Geolocation is not supported by this browser.");
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Control Page</title>
+  <style>
+    body { text-align: center; font-family: Arial, sans-serif; margin-top: 50px; }
+    button { padding: 10px 20px; font-size: 18px; }
+  </style>
+</head>
+<body>
+  <h1>Control Panel</h1>
+
+  <button onclick="getLocation()">Get GPS Coordinates</button>
+
+  <p id="status">Status: Waiting for action...</p>
+
+  <script>
+    function getLocation() {
+      document.getElementById("status").innerText = "Fetching location...";
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+      } else {
+        document.getElementById("status").innerText = "Geolocation not supported.";
+      }
     }
-  }
 
-  function showPosition(position) {
-    const lat = position.coords.latitude;
-    const lon = position.coords.longitude;
+    function showPosition(position) {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
 
-    // Display in control.html
-    document.getElementById("latitude").textContent = "Latitude: " + lat;
-    document.getElementById("longitude").textContent = "Longitude: " + lon;
+      // Store in localStorage
+      localStorage.setItem("latitude", lat);
+      localStorage.setItem("longitude", lon);
 
-    // Save to localStorage
-    localStorage.setItem("latitude", lat);
-    localStorage.setItem("longitude", lon);
+      // Redirect to index.html to display it
+      window.location.href = "index.html";
+    }
 
-    // Optional: Redirect to index.html
-    window.location.href = "index.html";
-  }
-
-  function showError(error) {
-    alert("Error: " + error.message);
-  }
-</script>
+    function showError(error) {
+      document.getElementById("status").innerText = "Error fetching location: " + error.message;
+    }
+  </script>
+</body>
+</html>
