@@ -11,8 +11,8 @@
 <body>
   <h1>Pothole Detection Robot</h1>
 
-  <p id="latitude">Latitude: Waiting...</p>
-  <p id="longitude">Longitude: Waiting...</p>
+  <p id="latitude"><strong>Latitude:</strong> Waiting for GPS...</p>
+  <p id="longitude"><strong>Longitude:</strong></p>
 
   <script>
     window.onload = function () {
@@ -20,11 +20,11 @@
       const lon = localStorage.getItem("longitude");
 
       if (lat && lon) {
-        document.getElementById("latitude").textContent = "Latitude: " + lat;
-        document.getElementById("longitude").textContent = "Longitude: " + lon;
+        document.getElementById("latitude").innerHTML = "<strong>Latitude:</strong> " + lat;
+        document.getElementById("longitude").innerHTML = "<strong>Longitude:</strong> " + lon;
       } else {
-        document.getElementById("latitude").textContent = "Latitude: Not Available";
-        document.getElementById("longitude").textContent = "Longitude: Not Available";
+        document.getElementById("latitude").innerHTML = "<strong>Latitude:</strong> Not available";
+        document.getElementById("longitude").innerHTML = "<strong>Longitude:</strong> Not available";
       }
     };
   </script>
