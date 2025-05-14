@@ -1,36 +1,29 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Robot Control</title>
-  <style>
-    body { text-align: center; font-family: Arial, sans-serif; margin-top: 50px; }
-    button { padding: 12px 20px; font-size: 18px; }
-    p { font-size: 20px; }
-  </style>
-</head>
-<body>
-  <h1>Control Panel</h1>
-  <button onclick="getLocation()">Get GPS Coordinates</button>
-  <p id="latitude"></p>
-  <p id="longitude"></p>
-
-  <script>
-    function getLocation() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition, showError);
-      } else {
-        alert("Geolocation is not supported by this browser.");
-      }
+<script>
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else {
+      alert("Geolocation is not supported by this browser.");
     }
+  }
 
-    function showPosition(position) {
-      document.getElementById("latitude").innerHTML = "Latitude: " + position.coords.latitude;
-      document.getElementById("longitude").innerHTML = "Longitude: " + position.coords.longitude;
-    }
+  function showPosition(position) {
+    const lat = position.coords.latitude;
+    const lon = position.coords.longitude;
 
-    function showError(error) {
-      alert("Error: " + error.message);
-    }
-  </script>
-</body>
-</html>
+    // Display in control.html
+    document.getElementById("latitude").textContent = "Latitude: " + lat;
+    document.getElementById("longitude").textContent = "Longitude: " + lon;
+
+    // Save to localStorage
+    localStorage.setItem("latitude", lat);
+    localStorage.setItem("longitude", lon);
+
+    // Optional: Redirect to index.html
+    window.location.href = "index.html";
+  }
+
+  function showError(error) {
+    alert("Error: " + error.message);
+  }
+</script>
